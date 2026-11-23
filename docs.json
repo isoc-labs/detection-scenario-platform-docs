@@ -11,14 +11,14 @@
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg",
-    "href": "https://dsp.xdr.ooo"
+    "href": "https://dsp.isoc.ooo"
   },
   "favicon": "/favicon.svg",
   "navbar": {
     "links": [
       {
         "type": "github",
-        "href": "https://github.com/xdr-labs/xdr-poc-script"
+        "href": "https://github.com/isoc-labs/xdr-poc-script"
       }
     ],
     "primary": {
@@ -33,7 +33,7 @@
   "seo": {
     "indexing": "navigable",
     "metatags": {
-      "canonical": "https://dsp.xdr.ooo"
+      "canonical": "https://dsp.isoc.ooo"
     }
   },
   "appearance": {

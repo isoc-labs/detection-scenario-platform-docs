@@ -34,7 +34,7 @@ sudo apt install -y git curl python3 python3-venv whiptail
 ## Recommended install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+curl -fsSL https://raw.githubusercontent.com/isoc-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
 ```
 
 The installer uses `$HOME/xdr-poc-script` by default and:
@@ -54,14 +54,14 @@ The online bootstrap normally needs access to GitHub and to the Python package s
 
 ```bash
 export DSP_REPO_DIR=/opt/xdr-poc-script
-curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+curl -fsSL https://raw.githubusercontent.com/isoc-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
 ```
 
 ## Install without opening the menu
 
 ```bash
 export DSP_NO_LAUNCH=1
-curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+curl -fsSL https://raw.githubusercontent.com/isoc-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
 ```
 
 Launch the default-path installation later with:
@@ -75,7 +75,7 @@ $HOME/xdr-poc-script/dsp-menu.sh
 If you prefer not to pipe a script into `bash`:
 
 ```bash
-git clone --branch release/v1.4.0-rc https://github.com/xdr-labs/xdr-poc-script.git "$HOME/xdr-poc-script"
+git clone --branch release/v1.4.0-rc https://github.com/isoc-labs/xdr-poc-script.git "$HOME/xdr-poc-script"
 cd "$HOME/xdr-poc-script"
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
