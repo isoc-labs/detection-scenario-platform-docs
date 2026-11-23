@@ -34,7 +34,7 @@ sudo apt install -y git curl python3 python3-venv whiptail
 ## 권장 설치 방법
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+curl -fsSL https://raw.githubusercontent.com/isoc-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
 ```
 
 Installer는 기본적으로 `$HOME/xdr-poc-script`를 사용하며 다음을 수행합니다.
@@ -54,14 +54,14 @@ Installer는 기본적으로 `$HOME/xdr-poc-script`를 사용하며 다음을 �
 
 ```bash
 export DSP_REPO_DIR=/opt/xdr-poc-script
-curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+curl -fsSL https://raw.githubusercontent.com/isoc-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
 ```
 
 ## Menu를 열지 않고 설치
 
 ```bash
 export DSP_NO_LAUNCH=1
-curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+curl -fsSL https://raw.githubusercontent.com/isoc-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
 ```
 
 기본 경로 설치에서는 나중에 다음으로 Menu를 실행할 수 있습니다.
@@ -75,7 +75,7 @@ $HOME/xdr-poc-script/dsp-menu.sh
 `curl | bash` 방식을 사용하지 않으려면 다음과 같이 직접 설치할 수 있습니다.
 
 ```bash
-git clone --branch release/v1.4.0-rc https://github.com/xdr-labs/xdr-poc-script.git "$HOME/xdr-poc-script"
+git clone --branch release/v1.4.0-rc https://github.com/isoc-labs/xdr-poc-script.git "$HOME/xdr-poc-script"
 cd "$HOME/xdr-poc-script"
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip

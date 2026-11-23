@@ -2,9 +2,9 @@
 
 Mintlify documentation source for **Detection Scenario Platform (DSP)**.
 
-- Product source: https://github.com/xdr-labs/xdr-poc-script
-- Documentation repository: https://github.com/xdr-labs/detection-scenario-platform-docs
-- Custom hostname: `dsp.xdr.ooo`
+- Product source: https://github.com/isoc-labs/xdr-poc-script
+- Documentation repository: https://github.com/isoc-labs/detection-scenario-platform-docs
+- Custom hostname: `dsp.isoc.ooo`
 - Languages: English and Korean
 
 The public documentation is grounded in the current DSP `release/v1.4.0-rc` operator branch and Release 1.0 validation material. Customer-facing positioning is intentionally focused on **XDR and NDR POC validation**.
