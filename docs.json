@@ -19,6 +19,10 @@
       {
         "type": "github",
         "href": "https://github.com/isoc-labs/xdr-poc-script"
+      },
+      {
+        "label": "DSP Source",
+        "href": "https://github.com/isoc-labs/detection-scenario-platform"
       }
     ],
     "primary": {
