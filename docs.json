@@ -19,6 +19,10 @@
       {
         "type": "github",
         "href": "https://github.com/isoc-labs/xdr-poc-script"
+      },
+      {
+        "label": "DSP Source",
+        "href": "https://github.com/isoc-labs/detection-scenario-platform"
       }
     ],
     "primary": {
@@ -60,22 +64,41 @@
           {
             "group": "Start Here",
             "icon": "rocket",
-            "pages": ["index", "quickstart"]
+            "pages": [
+              "index",
+              "quickstart"
+            ]
           },
           {
             "group": "POC Guide",
             "icon": "shield-check",
-            "pages": ["poc-program", "scenarios", "xdr-correlation-demo", "reports-and-evidence"]
+            "pages": [
+              "poc-program",
+              "scenarios",
+              "xdr-correlation-demo",
+              "reports-and-evidence"
+            ]
           },
           {
             "group": "Setup & Operation",
             "icon": "terminal",
-            "pages": ["installation", "configuration", "execution-modes", "safety-and-guardrails", "troubleshooting"]
+            "pages": [
+              "installation",
+              "configuration",
+              "execution-modes",
+              "safety-and-guardrails",
+              "troubleshooting"
+            ]
           },
           {
             "group": "Reference",
             "icon": "book",
-            "pages": ["cli-reference", "validation-status", "architecture", "release-notes"]
+            "pages": [
+              "cli-reference",
+              "validation-status",
+              "architecture",
+              "release-notes"
+            ]
           }
         ]
       },
@@ -85,22 +108,41 @@
           {
             "group": "시작하기",
             "icon": "rocket",
-            "pages": ["ko/index", "ko/quickstart"]
+            "pages": [
+              "ko/index",
+              "ko/quickstart"
+            ]
           },
           {
             "group": "POC 가이드",
             "icon": "shield-check",
-            "pages": ["ko/poc-program", "ko/scenarios", "ko/xdr-correlation-demo", "ko/reports-and-evidence"]
+            "pages": [
+              "ko/poc-program",
+              "ko/scenarios",
+              "ko/xdr-correlation-demo",
+              "ko/reports-and-evidence"
+            ]
           },
           {
             "group": "설치 및 운영",
             "icon": "terminal",
-            "pages": ["ko/installation", "ko/configuration", "ko/execution-modes", "ko/safety-and-guardrails", "ko/troubleshooting"]
+            "pages": [
+              "ko/installation",
+              "ko/configuration",
+              "ko/execution-modes",
+              "ko/safety-and-guardrails",
+              "ko/troubleshooting"
+            ]
           },
           {
             "group": "참조",
             "icon": "book",
-            "pages": ["ko/cli-reference", "ko/validation-status", "ko/architecture", "ko/release-notes"]
+            "pages": [
+              "ko/cli-reference",
+              "ko/validation-status",
+              "ko/architecture",
+              "ko/release-notes"
+            ]
           }
         ]
       }
