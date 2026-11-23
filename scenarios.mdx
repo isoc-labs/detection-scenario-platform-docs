@@ -1,0 +1,92 @@
+---
+title: "Scenario Coverage"
+description: "Current DSP network, DNS, web, identity, protocol, and host-behavior scenarios for XDR/NDR POC validation."
+---
+
+# Scenario Coverage
+
+DSP uses scenario plugins under `scenarios/<id>/`. The current operational profile contains eleven customer-facing scenarios. Use `dsp plugins list` to see the plugins available in the installed build; development branches may contain additional internal or test plugins.
+
+## Operational scenario set
+
+| Scenario ID | Category | Activity generated | Typical POC signal |
+| --- | --- | --- | --- |
+| `host_behavior_check` | Host behavior | Controlled file/process activity on the execution host | Host-side evidence / XDR context |
+| `port_sweep` | Network | TCP probing across selected hosts/ports | Scan / reconnaissance |
+| `http_followup` | HTTP / Web | Repeated requests and attack-oriented paths against discovered HTTP services | Web scanning / suspicious requests |
+| `sql_injection` | HTTP / Web | SQL-injection-style requests including time-based and `UNION SELECT` patterns | NDR/web attack visibility |
+| `ssh_failure` | Identity / SSH | Repeated failed SSH authentication behavior | SSH brute-force / auth failure |
+| `ldap_enumeration` | Identity / LDAP | LDAP bind/query enumeration-style activity where LDAP is reachable | Directory enumeration |
+| `smb_login_failure` | Identity / SMB | Repeated SMB authentication failures | SMB bad-auth signal |
+| `kerberos_failure` | Identity / Kerberos | Kerberos failure attempts against discovered services | Identity / pre-auth failure |
+| `dga` | DNS | Algorithmically generated domain activity | DGA / DNS anomaly |
+| `rare_protocol_activity` | Network behavior | Low-frequency or unusual protocol activity | Rare protocol / anomaly |
+| `dns_tunnel` | DNS | Structured DNS query payload activity | DNS tunneling / exfil-style visibility |
+
+<Note>
+These are **activity and signal targets**, not alert guarantees. Whether an XDR/NDR product creates a detection depends on sensor visibility, policy, rules/models, and the customer environment.
+</Note>
+
+## How to choose scenarios for a POC
+
+For most evaluations, start with the `normal` profile and let DSP select the full active scenario order. Use explicit scenarios only when the POC has a narrow objective, such as DNS tunneling or web-attack visibility.
+
+### Network and discovery
+
+- `port_sweep`
+- `rare_protocol_activity`
+
+### DNS
+
+- `dga`
+- `dns_tunnel`
+
+### Web
+
+- `http_followup`
+- `sql_injection`
+
+### Identity/service behavior
+
+- `ssh_failure`
+- `ldap_enumeration`
+- `smb_login_failure`
+- `kerberos_failure`
+
+### Host behavior
+
+- `host_behavior_check` creates controlled host-side activity that can provide additional context when the XDR environment collects host telemetry.
+
+## Profile behavior
+
+Both current profiles use the same ordered scenario set:
+
+```text
+host_behavior_check → port_sweep → http_followup → sql_injection
+→ ssh_failure → ldap_enumeration → smb_login_failure
+→ kerberos_failure → dga → rare_protocol_activity → dns_tunnel
+```
+
+The difference is target coverage:
+
+- `normal` — representative targets, generally up to two for service-oriented scenarios
+- `high` — same per-target volume, expanded across more discovered targets subject to guardrails
+
+Service-specific scenarios only become meaningful when the corresponding host/service is reachable in the target environment.
+
+## Run a specific subset
+
+```bash
+dsp run \
+  --scenarios port_sweep,http_followup,dns_tunnel \
+  --profile normal \
+  --target-net 10.10.10.0/24
+```
+
+Replace the example CIDR with the authorized scope.
+
+## Check active plugins
+
+```bash
+dsp plugins list
+```

@@ -1,0 +1,116 @@
+---
+title: "Configuration & Profiles"
+description: "Configure target scope, execution mode, and DSP coverage profiles for XDR/NDR POCs."
+---
+
+# Configuration & Profiles
+
+DSP's operator menu stores persistent settings in:
+
+```text
+~/.dsp/config.env
+```
+
+A typical public installation looks like:
+
+```bash
+DSP_REPO_DIR=/home/user/xdr-poc-script
+TARGET_NET=10.10.10.0/24
+EXECUTION_MODE=local
+PROFILE=normal
+WEBSHELL_FAMILY=jsp
+WEBSHELL_URL=http://10.10.10.50:8080/shell.jsp
+REMOTE_WORK_DIR=/tmp/dsp
+```
+
+## Core settings
+
+| Setting | Supported values | Notes |
+| --- | --- | --- |
+| `TARGET_NET` | CIDR | Authorized test scope; replace examples with the approved network |
+| `EXECUTION_MODE` | `local`, `webshell` | Where scenario activity originates |
+| `PROFILE` | `normal`, `high` | Controls target coverage |
+| `WEBSHELL_FAMILY` | `jsp`, `php`, `aspx` | Used only in webshell mode |
+| `WEBSHELL_URL` | HTTP(S) URL | Authorized shell endpoint |
+| `REMOTE_WORK_DIR` | Writable remote path | Linux-validated default: `/tmp/dsp` |
+
+## Recommended first configuration
+
+For a first validation run, keep the setup simple:
+
+```text
+EXECUTION_MODE=local
+PROFILE=normal
+```
+
+Set `TARGET_NET` to the approved customer/lab CIDR. Move to webshell mode only when the activity must originate from an authorized host inside the target network.
+
+## Operational profiles
+
+The current v1.4.0 runtime supports two profiles:
+
+| Profile | Scenario set | Target coverage | Per-target volume |
+| --- | --- | --- | --- |
+| `normal` | Full active operational scenario order | Representative targets, generally up to 2 | Standard |
+| `high` | Same scenario set | Expands to all discovered targets, subject to caps | **Same as normal** |
+
+<Note>
+`high` expands **coverage**, not per-target intensity. Aggregate traffic can still increase because more discovered hosts participate.
+</Note>
+
+### Legacy profile names
+
+The runtime normalizes older names for compatibility:
+
+| Legacy value | Current behavior |
+| --- | --- |
+| `low` | maps to `normal` |
+| `balanced` | maps to `normal` |
+| `burst` | maps to `high` |
+
+New configurations should use only `normal` and `high`.
+
+## Current scenario order
+
+```text
+host_behavior_check
+port_sweep
+http_followup
+sql_injection
+ssh_failure
+ldap_enumeration
+smb_login_failure
+kerberos_failure
+dga
+rare_protocol_activity
+dns_tunnel
+```
+
+Inactive plugins are filtered out at runtime. In webshell mode, `host_behavior_check` is inserted as the required first-phase host activity when available.
+
+## Large target guardrail
+
+Networks wider than `/24` are blocked unless both explicit controls are supplied:
+
+```bash
+dsp run \
+  --target-net 10.0.0.0/16 \
+  --profile high \
+  --allow-large-target \
+  --max-hosts 10
+```
+
+## Advanced explicit scenario selection
+
+```bash
+dsp run \
+  --scenarios dns_tunnel,http_followup \
+  --profile normal \
+  --target-net 10.10.10.0/24
+```
+
+When `--scenarios` is supplied, the explicit list wins. An optional profile still applies volume and host-limit settings to those scenarios.
+
+<Card title="Scenario reference" icon="radar" href="/scenarios">
+  Review what each operational scenario is designed to generate.
+</Card>

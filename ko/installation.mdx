@@ -1,0 +1,108 @@
+---
+title: "설치"
+description: "Python 3.11 이상을 사용하는 Linux 운영 호스트에 DSP를 설치하거나 업데이트합니다."
+---
+
+# 설치
+
+[빠른 시작](/ko/quickstart)의 사전 조건 확인에서 문제가 있거나 설치 및 실행 방식을 직접 제어해야 할 때 이 페이지를 사용하세요.
+
+## 요구사항
+
+현재 Package는 **Python 3.11+**를 요구합니다. Bootstrap 방식은 `git`, `curl`, Python `venv` 지원도 필요합니다. `whiptail`은 필수는 아니지만 Menu UI를 위해 권장합니다.
+
+환경을 확인합니다.
+
+```bash
+python3 --version
+python3 -c 'import venv; print("venv: OK")'
+git --version
+curl --version
+```
+
+<Warning>
+사용 가능한 Python 버전이 3.11보다 낮다면 사용 중인 Linux 배포판에 맞는 Python 3.11+ Runtime을 먼저 설치하세요. 설치 스크립트는 오래된 Python으로 가상환경를 생성하지 않고 중단하도록 설계되어 있습니다.
+</Warning>
+
+기본 `python3`가 이미 3.11 이상인 Debian/Ubuntu 계열에서는 일반적으로 다음 Package를 준비하면 됩니다.
+
+```bash
+sudo apt update
+sudo apt install -y git curl python3 python3-venv whiptail
+```
+
+## 권장 설치 방법
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+```
+
+Installer는 기본적으로 `$HOME/xdr-poc-script`를 사용하며 다음을 수행합니다.
+
+1. `git`, Python 3.11+, `venv` 확인
+2. 기존 `~/.dsp/config.env`와 실행 기록 보존
+3. 현재 Operator Branch Clone/Update
+4. `.venv` 생성 또는 재사용
+5. `pip install -e .`로 DSP 설치
+6. `dsp-menu.sh` 실행
+
+<Note>
+온라인 설치는 일반적으로 GitHub와 `pip` 패키지 저장소에 접근할 수 있어야 합니다. 현재 설치 스크립트는 오프라인 설치를 지원하지 않습니다. 제한된 환경에서는 고객이 승인한 소프트웨어 반입 절차를 이용해 소스 저장소와 필요한 Python 의존성를 미리 반입해야 합니다.
+</Note>
+
+## Custom Install Directory
+
+```bash
+export DSP_REPO_DIR=/opt/xdr-poc-script
+curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+```
+
+## Menu를 열지 않고 설치
+
+```bash
+export DSP_NO_LAUNCH=1
+curl -fsSL https://raw.githubusercontent.com/xdr-labs/xdr-poc-script/release/v1.4.0-rc/install-dsp.sh | bash
+```
+
+기본 경로 설치에서는 나중에 다음으로 Menu를 실행할 수 있습니다.
+
+```bash
+$HOME/xdr-poc-script/dsp-menu.sh
+```
+
+## Manual Install
+
+`curl | bash` 방식을 사용하지 않으려면 다음과 같이 직접 설치할 수 있습니다.
+
+```bash
+git clone --branch release/v1.4.0-rc https://github.com/xdr-labs/xdr-poc-script.git "$HOME/xdr-poc-script"
+cd "$HOME/xdr-poc-script"
+python3 -m venv .venv
+.venv/bin/pip install --upgrade pip
+.venv/bin/pip install -e .
+./dsp-menu.sh
+```
+
+## 기존 설치 업데이트
+
+가장 쉬운 방법은 Operator Menu의 **1 — Update latest patch**를 사용하는 것입니다. 설치 스크립트를 다시 실행해도 기존 Repository를 Update하며 `~/.dsp/` 상태는 유지됩니다.
+
+<Warning>
+현재 설치 스크립트는 `release/v1.4.0-rc`를 사용합니다. 이전 `release/v1.4.0` 브랜치는 더 이상 사용하지 않는 트래픽 양 동작이 포함되어 있어 설치 스크립트와 메뉴에서 거부됩니다.
+</Warning>
+
+## 설치 검증
+
+```bash
+cd "$HOME/xdr-poc-script"
+source .venv/bin/activate
+
+dsp --version
+dsp plugins list
+```
+
+현재 Operator Branch에서 예상되는 Product Version은 `dsp 1.4.0`입니다.
+
+<Card title="첫 테스트 실행" icon="rocket" href="/ko/quickstart">
+  Webshell 설정 전에 local 모드 + normal 프로필로 먼저 동작을 확인하세요.
+</Card>
